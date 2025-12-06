@@ -184,9 +184,9 @@ p {
 
     <!-- CONTENT BLOCK -->
     <div class="content-block">
-        <h2>Image 1 Section</h2>
-        <img src="assets/image3.jpg" alt="Image 1" style="max-width:350px; width:100%; height:auto;">
-        <p>Paragraph about Image 1.</p>
+        <h2>Image 3 Section</h2>
+        <img src="assets/image3.jpg" alt="Image 3" style="max-width:350px; width:100%; height:auto;">
+        <p>Paragraph about Image 3.</p>
 
         <h2>Image 2 Section</h2>
         <img src="assets/image2.jpg" alt="Image 2" style="max-width:300px; width:100%; height:auto;">
@@ -197,6 +197,249 @@ p {
             <source src="assets/video1.mp4" type="video/mp4">
         </video>
         <p>Paragraph about the video.</p>
+    </div>
+</div>
+
+<script>
+/* POPUP */
+function closePopup(){ document.getElementById("popup").style.display="none"; }
+
+/* SNOW - multiple layers for parallax behind content */
+function createSnow(count, className, minSize, maxSize){
+    for(let i=0;i<count;i++){
+        let f=document.createElement("div");
+        f.className="snowflake "+className;
+        f.innerHTML="❄";
+        f.style.left=Math.random()*100+"vw";
+        f.style.fontSize=(minSize+Math.random()*(maxSize-minSize))+"px";
+        document.body.appendChild(f);
+    }
+}
+createSnow(60, "slow", 10, 15);
+createSnow(50, "medium", 12, 18);
+createSnow(40, "fast", 14, 20);
+</script>
+
+</body>
+</html>
+✅ Changes made:
+
+All references to image1 are now image3.
+
+Everything else — popup, snow, Santa, tree, tinsel/glow, video glow, mobile responsiveness — unchanged.
+
+This is ready to go with your GitHub Pages.
+
+Do you want me to add animated sparkling tinsel around image2 and image3 next to make them even more premium?
+
+
+You said:
+image 3should be titled Fortnite Poster image2 should be titles Selfie With Poster and Video should be titled Video About Poster
+
+ChatGPT said:
+Perfect! We’ll update the section headings to your requested titles while keeping all the styles, glow effects, and layout intact. Here’s the full updated code:
+
+html
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Premium Christmas Site</title>
+<style>
+/* --- GLOBAL STYLES --- */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(to bottom, #00111f, #002244, #003366);
+    color: #fff;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- SNOW --- */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    font-size: 1.2rem;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+    z-index: 1;
+}
+.snowflake.slow { animation-duration: 14s; opacity:0.3; }
+.snowflake.medium { animation-duration: 9s; opacity:0.6; }
+.snowflake.fast { animation-duration: 5s; opacity:1; }
+@keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+/* --- POPUP --- */
+#popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    text-align: center;
+    padding: 20px;
+}
+#popup h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ffcc00;
+    text-shadow: 0 0 10px #ff0000;
+}
+#popup button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.4rem;
+    background: #ff0000;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ff0000;
+}
+
+/* --- SANTA --- */
+#santaFly {
+    position: fixed;
+    top: 5%;
+    left: -400px;
+    width: 600px;
+    max-width: 90vw;
+    height: auto;
+    animation: fly 12s ease-in-out infinite;
+    z-index: 50;
+}
+@keyframes fly { 0% { left: -600px; } 50% { left: 50vw; } 100% { left: 120vw; } }
+
+/* --- MAIN CONTENT --- */
+.section {
+    max-width: 900px;
+    width: 95%;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+    position: relative;
+    text-align: center;
+}
+
+/* --- HEADINGS --- */
+h1, h2 {
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    margin-bottom: 20px;
+}
+
+/* --- CHRISTMAS TREE --- */
+#tree {
+    width: 350px;
+    max-width: 80vw;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+    margin-bottom: 40px;
+}
+
+/* --- CONTENT BLOCK --- */
+.content-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.content-block img,
+.content-block video {
+    border-radius: 12px;
+    margin-top: 15px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* --- TINSEL / FESTIVE BORDER & GLOW --- */
+.content-block img {
+    border: 5px solid transparent;
+    border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><circle cx="5" cy="5" r="5" fill="gold"/></svg>') 10 repeat;
+    box-shadow: 0 0 30px gold, 0 0 60px rgba(255, 215, 0, 0.5);
+}
+.content-block img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px gold, 0 0 80px rgba(255, 215, 0, 0.7);
+}
+
+/* --- VIDEO GLOW --- */
+.content-block video {
+    box-shadow: 0 0 30px gold, 0 0 60px rgba(255, 215, 0, 0.5);
+    border-radius: 12px;
+}
+.content-block video:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px gold, 0 0 80px rgba(255, 215, 0, 0.7);
+}
+
+p {
+    background: rgba(255,255,255,0.08);
+    padding: 15px;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    margin-bottom: 40px;
+    max-width: 90%;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* --- RESPONSIVE --- */
+@media(max-width:768px){
+    #santaFly { width: 280px; top: 3%; }
+    #tree { width: 70vw; }
+    p { font-size: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- POPUP -->
+<div id="popup">
+    <h2>⚠ WARNING ⚠</h2>
+    <p>Do not access this Christmas content before December 25th!</p>
+    <button onclick="closePopup()">Continue</button>
+</div>
+
+<!-- SANTA -->
+<img id="santaFly" src="assets/santa.png" alt="Santa">
+
+<!-- MAIN CONTENT -->
+<div class="section">
+    <h1>🎄 Ultimate Premium Christmas Experience 🎅</h1>
+
+    <!-- CHRISTMAS TREE -->
+    <img id="tree" src="assets/tree.png" alt="Christmas Tree">
+
+    <!-- CONTENT BLOCK -->
+    <div class="content-block">
+        <h2>Fortnite Poster</h2>
+        <img src="assets/image3.jpg" alt="Image 3" style="max-width:350px; width:100%; height:auto;">
+        <p>Paragraph about the Fortnite Poster.</p>
+
+        <h2>Selfie With Poster</h2>
+        <img src="assets/image2.jpg" alt="Image 2" style="max-width:300px; width:100%; height:auto;">
+        <p>Paragraph about the Selfie With Poster.</p>
+
+        <h2>Video About Poster</h2>
+        <video controls style="max-width:250px; width:100%; height:auto;">
+            <source src="assets/video1.mp4" type="video/mp4">
+        </video>
+        <p>Paragraph about the Video About Poster.</p>
     </div>
 </div>
 

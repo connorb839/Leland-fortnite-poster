@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium Christmas Site</title>
+<title>Ultimate Premium Christmas Site</title>
 <style>
 /* --- GLOBAL STYLES --- */
 body {
@@ -13,21 +13,26 @@ body {
     color: #fff;
     overflow-x: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* --- HEADINGS --- */
-h1, h2 {
-    text-align: center;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
-    margin-bottom: 20px;
+/* --- SNOW --- */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    font-size: 1.2rem;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+    z-index: 1;
 }
-
-/* --- SECTIONS --- */
-.section {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-}
+.snowflake.slow { animation-duration: 14s; opacity:0.3; }
+.snowflake.medium { animation-duration: 9s; opacity:0.6; }
+.snowflake.fast { animation-duration: 5s; opacity:1; }
+@keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
 /* --- POPUP --- */
 #popup {
@@ -60,48 +65,56 @@ h1, h2 {
     box-shadow: 0 0 15px #ff0000;
 }
 
-/* --- SNOW LAYERS --- */
-.snowflake {
-    position: fixed;
-    top: -10px;
-    color: white;
-    font-size: 1.2rem;
-    user-select: none;
-    pointer-events: none;
-    animation: fall linear infinite;
-    z-index: 20;
-}
-.snowflake.slow { animation-duration: 12s; opacity:0.3; }
-.snowflake.medium { animation-duration: 8s; opacity:0.6; }
-.snowflake.fast { animation-duration: 4s; opacity:1; }
-@keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-
 /* --- SANTA --- */
 #santaFly {
     position: fixed;
-    top: 20px;
+    top: 5%;
     left: -400px;
     width: 600px;
     max-width: 90vw;
     height: auto;
     animation: fly 12s ease-in-out infinite;
-    z-index: 200;
+    z-index: 50;
 }
 @keyframes fly { 0% { left: -600px; } 50% { left: 50vw; } 100% { left: 120vw; } }
 
+/* --- MAIN CONTENT --- */
+.section {
+    max-width: 900px;
+    width: 95%;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+    position: relative;
+    text-align: center;
+}
+
+/* --- HEADINGS --- */
+h1, h2 {
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    margin-bottom: 20px;
+}
+
 /* --- CHRISTMAS TREE --- */
+#tree-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+}
 #tree {
     width: 350px;
     max-width: 80vw;
     height: auto;
-    display: block;
-    margin: 40px auto;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-    position: relative;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
 }
 
-/* --- ROTATING LIGHTS AROUND TREE --- */
+/* --- ROTATING TREE LIGHTS --- */
 .tree-lights {
     position: absolute;
     top: 50%;
@@ -111,7 +124,7 @@ h1, h2 {
     margin-left: -180px;
     margin-top: -180px;
     pointer-events: none;
-    z-index: 210;
+    z-index: 20;
 }
 .tree-light {
     position: absolute;
@@ -119,38 +132,48 @@ h1, h2 {
     height: 18px;
     border-radius: 50%;
     background: red;
-    box-shadow: 0 0 8px red;
-    animation: rotateLight 6s linear infinite;
+    box-shadow: 0 0 12px red;
+    animation: rotateLight 6s linear infinite, pulse 1.2s infinite alternate;
 }
 .tree-light:nth-child(1){ transform: rotate(0deg) translate(160px) rotate(0deg);}
 .tree-light:nth-child(2){ transform: rotate(60deg) translate(160px) rotate(-60deg);}
 .tree-light:nth-child(3){ transform: rotate(120deg) translate(160px) rotate(-120deg);}
-tree-light:nth-child(4){ transform: rotate(180deg) translate(160px) rotate(-180deg);}
+.tree-light:nth-child(4){ transform: rotate(180deg) translate(160px) rotate(-180deg);}
 .tree-light:nth-child(5){ transform: rotate(240deg) translate(160px) rotate(-240deg);}
 .tree-light:nth-child(6){ transform: rotate(300deg) translate(160px) rotate(-300deg);}
 @keyframes rotateLight { 0%{ transform: rotate(0deg) translate(160px) rotate(0deg);} 100%{ transform: rotate(360deg) translate(160px) rotate(-360deg);} }
+@keyframes pulse { 0% { box-shadow: 0 0 12px red; } 100% { box-shadow: 0 0 24px yellow; } }
 
 /* --- CONTENT BLOCK --- */
+.content-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
 .content-block img,
 .content-block video {
-    width: 100%;
     border-radius: 12px;
     margin-top: 15px;
-    box-shadow: 0 0 16px rgba(255,255,255,0.25);
+    box-shadow: 0 0 25px rgba(255,255,255,0.25);
 }
 p {
     background: rgba(255,255,255,0.08);
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 12px;
     backdrop-filter: blur(4px);
     margin-bottom: 40px;
+    max-width: 90%;
     line-height: 1.6;
 }
 
 /* --- RESPONSIVE --- */
 @media(max-width:768px){
-    #santaFly { width: 300px; }
+    #santaFly { width: 280px; top: 3%; }
     #tree { width: 70vw; }
+    .tree-lights { width: 260px; height: 260px; margin-left: -130px; margin-top: -130px; }
+    .tree-light { width: 14px; height: 14px; }
+    p { font-size: 1rem; }
 }
 </style>
 </head>
@@ -168,10 +191,10 @@ p {
 
 <!-- MAIN CONTENT -->
 <div class="section">
-    <h1>🎄 Premium Christmas Experience 🎅</h1>
+    <h1>🎄 Ultimate Premium Christmas Experience 🎅</h1>
 
-    <!-- CHRISTMAS TREE -->
-    <div style="position: relative; display: inline-block;">
+    <!-- TREE WITH LIGHTS -->
+    <div id="tree-container">
         <img id="tree" src="assets/tree.png" alt="Christmas Tree">
         <div class="tree-lights">
             <div class="tree-light"></div>
@@ -205,31 +228,20 @@ p {
 /* POPUP */
 function closePopup(){ document.getElementById("popup").style.display="none"; }
 
-/* SNOW - multiple layers for depth */
-for(let i=0;i<60;i++){
-    let f=document.createElement("div");
-    f.className="snowflake slow";
-    f.innerHTML="❄";
-    f.style.left=Math.random()*100+"vw";
-    f.style.fontSize=(10+Math.random()*15)+"px";
-    document.body.appendChild(f);
+/* SNOW - multiple layers for parallax behind content */
+function createSnow(count, className, minSize, maxSize){
+    for(let i=0;i<count;i++){
+        let f=document.createElement("div");
+        f.className="snowflake "+className;
+        f.innerHTML="❄";
+        f.style.left=Math.random()*100+"vw";
+        f.style.fontSize=(minSize+Math.random()*(maxSize-minSize))+"px";
+        document.body.appendChild(f);
+    }
 }
-for(let i=0;i<50;i++){
-    let f=document.createElement("div");
-    f.className="snowflake medium";
-    f.innerHTML="❄";
-    f.style.left=Math.random()*100+"vw";
-    f.style.fontSize=(12+Math.random()*18)+"px";
-    document.body.appendChild(f);
-}
-for(let i=0;i<40;i++){
-    let f=document.createElement("div");
-    f.className="snowflake fast";
-    f.innerHTML="❄";
-    f.style.left=Math.random()*100+"vw";
-    f.style.fontSize=(14+Math.random()*20)+"px";
-    document.body.appendChild(f);
-}
+createSnow(60, "slow", 10, 15);
+createSnow(50, "medium", 12, 18);
+createSnow(40, "fast", 14, 20);
 </script>
 
 </body>

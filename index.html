@@ -1,13 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Sophie is a nigger</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Christmas Madness</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: #0a0a0a;
+        color: white;
+        overflow-x: hidden;
+        cursor: url('https://cur.cursors-4u.net/nature/nat-7/nat651.cur'), auto;
+    }
+
+    /* SNOW */
+    .snow {
+        position: fixed;
+        top: -10px;
+        color: white;
+        font-size: 1.2rem;
+        opacity: 0.9;
+        pointer-events: none;
+        animation: fall linear infinite;
+        z-index: 100;
+    }
+    @keyframes fall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+        }
+    }
+
+    /* POPUP */
+    #popup {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        z-index: 99999;
+    }
+    #popup button {
+        margin-top: 20px;
+        padding: 14px 30px;
+        font-size: 1.3rem;
+        background: red;
+        border: none;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 0 12px red;
+    }
+
+    /* MAIN CONTENT */
+    .section {
+        max-width: 900px;
+        margin: auto;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        z-index: 50;
+    }
+
+    h1 {
+        font-size: 2.8rem;
+        text-shadow: 0 0 20px red, 0 0 20px green;
+        margin-top: 40px;
+    }
+
+    img, video {
+        width: 100%;
+        border-radius: 15px;
+        border: 4px solid #fff;
+        box-shadow: 0 0 20px red, 0 0 20px green;
+        margin-top: 15px;
+    }
+
+    p {
+        background: rgba(255,255,255,0.15);
+        padding: 15px;
+        border-radius: 10px;
+        backdrop-filter: blur(6px);
+    }
+
+    /* FAIRY LIGHTS */
+    .lights {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        padding: 10px 0;
+    }
+    .light {
+        width: 25px;
+        height: 35px;
+        border-radius: 50%;
+        animation: glow 1s infinite alternate;
+    }
+    @keyframes glow {
+        0% { opacity: 0.2; }
+        100% { opacity: 1; }
+    }
+
+    /* SANTA FLYING */
+    #santa {
+        position: fixed;
+        top: 20px;
+        left: -200px;
+        width: 150px;
+        z-index: 9999;
+        animation: fly 12s linear infinite;
+    }
+    @keyframes fly {
+        from { left: -200px; }
+        to { left: 120%; }
+    }
+
+    /* PRESENTS BOUNCING */
+    .present {
+        width: 70px;
+        position: fixed;
+        bottom: 0;
+        animation: bounce 2s infinite;
+        z-index: 500;
+    }
+    .p1 { left: 10%; }
+    .p2 { left: 45%; }
+    .p3 { left: 80%; }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    /* STOCKINGS */
+    .stocking {
+        position: fixed;
+        top: 50%;
+        width: 80px;
+        transform: translateY(-50%);
+        z-index: 400;
+    }
+    .left { left: 5px; }
+    .right { right: 5px; }
+
+    /* FIREPLACE */
+    #fireplace {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 200;
+        pointer-events: none;
+    }
+
+    /* MUSIC BUTTON */
+    #muteBtn {
+        position: fixed;
+        bottom: 120px;
+        right: 20px;
+        background: red;
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: none;
+        color: white;
+        z-index: 9999;
+        cursor: pointer;
+        box-shadow: 0 0 10px red;
+    }
+
+</style>
 </head>
 <body>
 
-    <h1>Sophie you nigger wanker</h1>
-    <p>Sophie you fucking nigger</p>
+<!-- POPUP -->
+<div id="popup">
+    <h2>🎄⚠ STOP RIGHT THERE! ⚠🎄</h2>
+    <p>This site contains forbidden Christmas intel.  
+    Do NOT proceed if today is BEFORE December 25th!!!</p>
+    <button onclick="closePopup()">I Accept My Fate 🎅</button>
+</div>
+
+<!-- SANTA -->
+<img id="santa" src="https://i.imgur.com/UZpSOyM.png">
+
+<!-- STOCKINGS -->
+<img class="stocking left" src="https://i.imgur.com/NBb4V0u.png">
+<img class="stocking right" src="https://i.imgur.com/NBb4V0u.png">
+
+<!-- PRESENTS -->
+<img class="present p1" src="https://i.imgur.com/3xqgGbc.png">
+<img class="present p2" src="https://i.imgur.com/3xqgGbc.png">
+<img class="present p3" src="https://i.imgur.com/3xqgGbc.png">
+
+<!-- FIREPLACE -->
+<img id="fireplace" src="https://i.imgur.com/lnZQs6Q.gif">
+
+<!-- MUSIC -->
+<audio id="music" loop autoplay>
+    <source src="https://files.catbox.moe/4b4cmi.mp3" type="audio/mpeg">
+</audio>
+<button id="muteBtn" onclick="toggleMute()">Mute Music</button>
+
+<!-- SNOW GENERATOR -->
+<script>
+for (let i = 0; i < 80; i++) {
+    const s = document.createElement("div");
+    s.className = "snow";
+    s.innerHTML = "❄";
+    s.style.left = Math.random()*100 + "vw";
+    s.style.fontSize = 10 + Math.random()*20 + "px";
+    s.style.animationDuration = 4 + Math.random()*6 + "s";
+    document.body.appendChild(s);
+}
+</script>
+
+<!-- FAIRY LIGHTS -->
+<div class="lights">
+    <div class="light" style="background:red"></div>
+    <div class="light" style="background:green"></div>
+    <div class="light" style="background:gold"></div>
+    <div class="light" style="background:blue"></div>
+    <div class="light" style="background:red"></div>
+</div>
+
+<div class="section">
+    <h1>🎅 The Ultimate Christmas Page 🎄</h1>
+
+    <!-- IMAGE 1 -->
+    <h2>Image Section 1</h2>
+    <img src="YOUR_IMAGE_URL_1">
+    <p>Your paragraph for image 1 goes here.</p>
+
+    <!-- IMAGE 2 -->
+    <h2>Image Section 2</h2>
+    <img src="YOUR_IMAGE_URL_2">
+    <p>Your paragraph for image 2 goes here.</p>
+
+    <!-- VIDEO -->
+    <h2>Christmas Video</h2>
+    <video controls>
+        <source src="YOUR_VIDEO_URL" type="video/mp4">
+    </video>
+    <p>Your paragraph for the video goes here.</p>
+</div>
+
+<script>
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+function toggleMute() {
+    let audio = document.getElementById("music");
+    audio.muted = !audio.muted;
+    document.getElementById("muteBtn").innerText = audio.muted ? "Unmute Music" : "Mute Music";
+}
+</script>
 
 </body>
 </html>

@@ -146,6 +146,7 @@ h1, h2 {
     box-shadow: 0 0 40px gold, 0 0 80px rgba(255, 215, 0, 0.7);
 }
 
+/* --- PARAGRAPHS --- */
 p {
     background: rgba(255,255,255,0.08);
     padding: 15px;
@@ -155,6 +156,8 @@ p {
     max-width: 90%;
     line-height: 1.6;
     text-align: center;
+    white-space: pre-wrap; /* preserves line breaks */
+    word-break: break-word; /* ensures text wraps nicely */
 }
 
 /* --- RESPONSIVE --- */
@@ -188,26 +191,17 @@ p {
     <div class="content-block">
         <h2>Fortnite Poster</h2>
         <img src="assets/image3.jpg" alt="Fortnite Poster" style="max-width:350px; width:100%; height:auto;">
-        <p>Where it all began November 2024,
-           A fortnite poster from the lego store,
-           You got the last one almost too late,
-           You've chosen your future and sealed your fate,</p>
+        <p class="formatted">Where it all began November 2024, A fortnite poster from the lego store, You got the last one almost too late, You've chosen your future and sealed your fate,</p>
 
         <h2>Selfie With Poster</h2>
         <img src="assets/image2.jpg" alt="Selfie With Poster" style="max-width:300px; width:100%; height:auto;">
-        <p>Where it next began October 2025,
-        A sealed envelope with a card inside,
-        We taped it up just in time,
-        You didnt catch us and our heinous crime,</p>
+        <p class="formatted">Where it next began October 2025, A sealed envelope with a card inside, We taped it up just in time, You didnt catch us and our heinous crime,</p>
 
         <h2>Video About Poster</h2>
         <video controls style="max-width:250px; width:100%; height:auto;">
             <source src="assets/video1.mp4" type="video/mp4">
         </video>
-        <p>This is where it ends December 2025,
-        Look at your fortnite on your bedside,
-        This was very difficult oh so hard,
-        Now fuck off and open your card,</p>
+        <p class="formatted">This is where it ends December 2025, Look at your fortnite on your bedside, This was very difficult oh so hard, Now fuck off and open your card,</p>
     </div>
 </div>
 
@@ -233,6 +227,11 @@ function createSnow(count, className, minSize, maxSize){
 createSnow(60, "slow", 10, 15);
 createSnow(50, "medium", 12, 18);
 createSnow(40, "fast", 14, 20);
+
+/* --- FORMAT PARAGRAPHS --- */
+document.querySelectorAll('.formatted').forEach(p => {
+    p.innerHTML = p.textContent.split(',').map(line => line.trim()).join(',\n');
+});
 </script>
 
 </body>

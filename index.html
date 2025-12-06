@@ -3,236 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHRISTMAS CHAOS MODE</title>
+<title>Premium Christmas Site</title>
 
 <style>
-    /* GLOBAL STYLES */
-    body {
-        margin: 0;
-        overflow-x: hidden;
-        background: linear-gradient(180deg, #001, #004, #007);
-        height: 100vh;
-        font-family: Arial, sans-serif;
-        color: white;
-    }
+/* --- GLOBAL STYLES --- */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(to bottom, #00111f, #002244, #003366);
+    color: #fff;
+    overflow-x: hidden;
+    position: relative;
+}
 
-    h1, h2 {
-        text-shadow: 0 0 10px red, 0 0 10px lime;
-    }
+h1, h2 {
+    text-align: center;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+    margin-bottom: 20px;
+}
 
-    .section {
-        max-width: 900px;
-        margin: auto;
-        padding: 20px;
-        text-align: center;
-        z-index: 10;
-        position: relative;
-    }
+.section {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
 
-    /* POPUP */
-    #popup {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.95);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        text-align: center;
-        padding: 20px;
-    }
+/* --- POPUP --- */
+#popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    text-align: center;
+    padding: 20px;
+}
+#popup h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ffcc00;
+    text-shadow: 0 0 10px #ff0000;
+}
+#popup button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.4rem;
+    background: #ff0000;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ff0000;
+}
 
-    #popup h2 {
-        font-size: 2rem;
-    }
+/* --- SNOW --- */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    font-size: 1.2rem;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+    z-index: 20;
+}
+@keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-    #popup button {
-        margin-top: 20px;
-        padding: 15px 30px;
-        font-size: 1.4rem;
-        background: red;
-        border: none;
-        border-radius: 10px;
-        color: white;
-        box-shadow: 0 0 15px red;
-    }
+/* --- SANTA --- */
+#santaFly {
+    position: fixed;
+    top: 20px;
+    left: -400px;
+    width: 600px;
+    max-width: 90vw;
+    height: auto;
+    animation: fly 12s ease-in-out infinite;
+    z-index: 200;
+}
+@keyframes fly { 0% { left: -600px; } 50% { left: 50vw; } 100% { left: 120vw; } }
 
-    /* SNOW */
-    .snowflake {
-        position: fixed;
-        top: -10px;
-        color: white;
-        font-size: 1.2rem;
-        user-select: none;
-        pointer-events: none;
-        animation: fall linear infinite;
-        z-index: 50;
-    }
+/* --- CHRISTMAS TREE --- */
+#tree {
+    width: 350px;
+    max-width: 80vw;
+    height: auto;
+    display: block;
+    margin: 40px auto;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
 
-    @keyframes fall {
-        to {
-            transform: translateY(110vh) rotate(360deg);
-        }
-    }
+/* --- CONTENT BLOCK --- */
+.content-block img,
+.content-block video {
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 15px;
+    box-shadow: 0 0 12px rgba(255,255,255,0.2);
+}
+p {
+    background: rgba(255,255,255,0.08);
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
 
-    /* INTERACTIVE SNOW */
-    .burst {
-        position: fixed;
-        color: white;
-        font-size: 2rem;
-        pointer-events: none;
-        animation: burstAnim 1s ease-out forwards;
-    }
+/* --- LIGHTS --- */
+.lights {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0;
+}
+.light {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    animation: pulse 1.4s infinite alternate;
+}
+@keyframes pulse {
+    0% { background: red; box-shadow: 0 0 6px red; }
+    50% { background: gold; box-shadow: 0 0 6px gold; }
+    100% { background: lime; box-shadow: 0 0 6px lime; }
+}
 
-    @keyframes burstAnim {
-        from { opacity: 1; transform: scale(1); }
-        to { opacity: 0; transform: scale(3); }
-    }
+/* --- CSS FIREPLACE --- */
+#fireplace {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: #300;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 100;
+}
+.flame {
+    width: 20px;
+    height: 50px;
+    margin: 0 5px;
+    background: orange;
+    border-radius: 50% 50% 0 0;
+    filter: blur(2px);
+    animation: flicker 0.3s infinite alternate;
+}
+@keyframes flicker { from { transform: scaleY(1); } to { transform: scaleY(1.4); } }
 
-    /* CSS SANTA */
-    #santa {
-        width: 120px;
-        height: 60px;
-        background: red;
-        border-radius: 20px;
-        position: fixed;
-        top: 20px;
-        left: -200px;
-        animation: fly 10s linear infinite;
-        box-shadow: 0 0 15px white;
-        z-index: 999;
-    }
-
-    /* Santa’s hat */
-    #santa::before {
-        content: "";
-        position: absolute;
-        top: -20px;
-        left: 20px;
-        width: 40px;
-        height: 20px;
-        background: red;
-        border-radius: 20px 20px 0 0;
-        box-shadow: 0 0 10px white;
-    }
-
-    /* Santa’s ball on hat */
-    #santa::after {
-        content: "❄";
-        position: absolute;
-        top: -25px;
-        left: 50px;
-        font-size: 25px;
-    }
-
-    @keyframes fly {
-        from { left: -200px; }
-        to { left: 120vw; }
-    }
-
-    /* REINDEER (pure emoji, animated) */
-    .reindeer {
-        position: fixed;
-        top: 60px;
-        left: -200px;
-        font-size: 2rem;
-        animation: fly2 10s linear infinite;
-        z-index: 998;
-    }
-
-    @keyframes fly2 {
-        from { left: -200px; }
-        to { left: 120vw; }
-    }
-
-    /* FIREPLACE (CSS flames) */
-    #fireplace {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 120px;
-        background: #300;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        z-index: 200;
-    }
-
-    .flame {
-        width: 20px;
-        height: 40px;
-        background: orange;
-        margin: 0 5px;
-        border-radius: 50% 50% 0 0;
-        animation: flicker 0.3s infinite alternate;
-        filter: blur(2px);
-    }
-
-    @keyframes flicker {
-        from { transform: scaleY(1); }
-        to   { transform: scaleY(1.4); }
-    }
-
-    /* CHRISTMAS TREE (pure CSS triangles) */
-    #tree {
-        margin: 40px auto;
-        width: 0;
-        height: 0;
-        border-left: 100px solid transparent;
-        border-right: 100px solid transparent;
-        border-bottom: 150px solid green;
-        position: relative;
-        filter: drop-shadow(0 0 10px lime);
-    }
-
-    #tree::before {
-        content: "";
-        position: absolute;
-        top: 40px;
-        left: -70px;
-        width: 0;
-        height: 0;
-        border-left: 70px solid transparent;
-        border-right: 70px solid transparent;
-        border-bottom: 100px solid green;
-    }
-
-    #tree::after {
-        content: "⭐";
-        position: absolute;
-        top: -40px;
-        left: -15px;
-        font-size: 40px;
-        animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-
-    /* LIGHTS (color cycling) */
-    .lights {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 30px;
-    }
-
-    .bulb {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        animation: glow 1s infinite alternate;
-    }
-
-    @keyframes glow {
-        0%   { background: red; box-shadow: 0 0 10px red; }
-        50%  { background: gold; box-shadow: 0 0 10px gold; }
-        100% { background: lime; box-shadow: 0 0 10px lime; }
-    }
-
+/* --- RESPONSIVE --- */
+@media(max-width:768px){
+    #santaFly { width: 300px; }
+    #tree { width: 70vw; }
+}
 </style>
 </head>
 <body>
@@ -240,18 +168,47 @@
 <!-- POPUP -->
 <div id="popup">
     <h2>⚠ WARNING ⚠</h2>
-    <p>You are attempting to access classified Christmas information.<br>
-    Do NOT continue unless today is after December 25th.</p>
-    <button onclick="closePopup()">I Accept 🎅</button>
+    <p>Do not access this Christmas content before December 25th!</p>
+    <button onclick="closePopup()">Continue</button>
 </div>
 
-<!-- Santa -->
-<div id="santa"></div>
+<!-- SANTA -->
+<img id="santaFly" src="assets/santa.png" alt="Santa">
 
-<!-- Reindeer -->
-<div class="reindeer">🦌🦌🦌</div>
+<!-- MAIN CONTENT -->
+<div class="section">
+    <h1>🎄 Premium Christmas Experience 🎅</h1>
 
-<!-- Fireplace -->
+    <!-- CHRISTMAS TREE -->
+    <img id="tree" src="assets/tree.png" alt="Christmas Tree">
+
+    <!-- LIGHTS -->
+    <div class="lights">
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+    </div>
+
+    <!-- CONTENT BLOCK -->
+    <div class="content-block">
+        <h2>Image 1 Section</h2>
+        <img src="assets/image1.jpg" alt="Image 1">
+        <p>Paragraph about Image 1.</p>
+
+        <h2>Image 2 Section</h2>
+        <img src="assets/image2.jpg" alt="Image 2">
+        <p>Paragraph about Image 2.</p>
+
+        <h2>Video Section</h2>
+        <video controls>
+            <source src="assets/video.mp4" type="video/mp4">
+        </video>
+        <p>Paragraph about the video.</p>
+    </div>
+</div>
+
+<!-- CSS FIREPLACE -->
 <div id="fireplace">
     <div class="flame"></div>
     <div class="flame"></div>
@@ -259,77 +216,20 @@
     <div class="flame"></div>
 </div>
 
-<!-- MAIN CONTENT -->
-<div class="section">
-    <h1>🎄 CHRISTMAS CHAOS MODE ACTIVATED 🎅</h1>
-
-    <div id="tree"></div>
-
-    <div class="lights">
-        <div class="bulb"></div>
-        <div class="bulb"></div>
-        <div class="bulb"></div>
-        <div class="bulb"></div>
-        <div class="bulb"></div>
-    </div>
-
-    <h2>Your Image 1 Paragraph</h2>
-    <p>Put whatever text you want here.</p>
-
-    <h2>Your Image 2 Paragraph</h2>
-    <p>Put whatever text you want here.</p>
-
-    <h2>Your Video Paragraph</h2>
-    <p>Put whatever text you want here.</p>
-</div>
-
 <script>
 /* POPUP */
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
+function closePopup(){ document.getElementById("popup").style.display="none"; }
 
-/* SNOW GENERATOR */
-for (let i = 0; i < 80; i++) {
-    let f = document.createElement("div");
-    f.className = "snowflake";
-    f.innerHTML = "❄";
-    f.style.left = Math.random()*100 + "vw";
-    f.style.fontSize = 10 + Math.random()*20 + "px";
-    f.style.animationDuration = 4 + Math.random()*6 + "s";
+/* SNOW */
+for(let i=0;i<80;i++){
+    let f=document.createElement("div");
+    f.className="snowflake";
+    f.innerHTML="❄";
+    f.style.left=Math.random()*100+"vw";
+    f.style.fontSize=(10+Math.random()*20)+"px";
+    f.style.animationDuration=(4+Math.random()*6)+"s";
     document.body.appendChild(f);
 }
-
-/* INTERACTIVE SNOW */
-document.addEventListener("mousemove", e => {
-    let b = document.createElement("div");
-    b.className = "burst";
-    b.innerHTML = "❄";
-    b.style.left = e.pageX + "px";
-    b.style.top = e.pageY + "px";
-    document.body.appendChild(b);
-    setTimeout(() => b.remove(), 1000);
-});
-
-/* PHONE SHAKE → SNOWSTORM */
-let lastShake = 0;
-window.addEventListener("devicemotion", event => {
-    let accel = event.accelerationIncludingGravity;
-    let total = Math.abs(accel.x) + Math.abs(accel.y) + Math.abs(accel.z);
-
-    if (total > 35 && Date.now() - lastShake > 2000) {
-        lastShake = Date.now();
-        for (let i = 0; i < 50; i++) {
-            let f = document.createElement("div");
-            f.className = "snowflake";
-            f.innerHTML = "❄";
-            f.style.left = Math.random()*100 + "vw";
-            f.style.fontSize = 10 + Math.random()*20 + "px";
-            f.style.animationDuration = 2 + Math.random()*3 + "s";
-            document.body.appendChild(f);
-        }
-    }
-});
 </script>
 
 </body>

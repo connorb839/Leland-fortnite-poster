@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Premium Christmas Site</title>
-
 <style>
 /* --- GLOBAL STYLES --- */
 body {
@@ -16,12 +15,14 @@ body {
     position: relative;
 }
 
+/* --- HEADINGS --- */
 h1, h2 {
     text-align: center;
     text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
     margin-bottom: 20px;
 }
 
+/* --- SECTIONS --- */
 .section {
     max-width: 900px;
     margin: auto;
@@ -59,7 +60,7 @@ h1, h2 {
     box-shadow: 0 0 15px #ff0000;
 }
 
-/* --- SNOW --- */
+/* --- SNOW LAYERS --- */
 .snowflake {
     position: fixed;
     top: -10px;
@@ -70,6 +71,9 @@ h1, h2 {
     animation: fall linear infinite;
     z-index: 20;
 }
+.snowflake.slow { animation-duration: 12s; opacity:0.3; }
+.snowflake.medium { animation-duration: 8s; opacity:0.6; }
+.snowflake.fast { animation-duration: 4s; opacity:1; }
 @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
 /* --- SANTA --- */
@@ -94,7 +98,37 @@ h1, h2 {
     margin: 40px auto;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    position: relative;
 }
+
+/* --- ROTATING LIGHTS AROUND TREE --- */
+.tree-lights {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 360px;
+    height: 360px;
+    margin-left: -180px;
+    margin-top: -180px;
+    pointer-events: none;
+    z-index: 210;
+}
+.tree-light {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: red;
+    box-shadow: 0 0 8px red;
+    animation: rotateLight 6s linear infinite;
+}
+.tree-light:nth-child(1){ transform: rotate(0deg) translate(160px) rotate(0deg);}
+.tree-light:nth-child(2){ transform: rotate(60deg) translate(160px) rotate(-60deg);}
+.tree-light:nth-child(3){ transform: rotate(120deg) translate(160px) rotate(-120deg);}
+tree-light:nth-child(4){ transform: rotate(180deg) translate(160px) rotate(-180deg);}
+.tree-light:nth-child(5){ transform: rotate(240deg) translate(160px) rotate(-240deg);}
+.tree-light:nth-child(6){ transform: rotate(300deg) translate(160px) rotate(-300deg);}
+@keyframes rotateLight { 0%{ transform: rotate(0deg) translate(160px) rotate(0deg);} 100%{ transform: rotate(360deg) translate(160px) rotate(-360deg);} }
 
 /* --- CONTENT BLOCK --- */
 .content-block img,
@@ -102,7 +136,7 @@ h1, h2 {
     width: 100%;
     border-radius: 12px;
     margin-top: 15px;
-    box-shadow: 0 0 12px rgba(255,255,255,0.2);
+    box-shadow: 0 0 16px rgba(255,255,255,0.25);
 }
 p {
     background: rgba(255,255,255,0.08);
@@ -111,25 +145,6 @@ p {
     backdrop-filter: blur(4px);
     margin-bottom: 40px;
     line-height: 1.6;
-}
-
-/* --- LIGHTS --- */
-.lights {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin: 20px 0;
-}
-.light {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    animation: pulse 1.4s infinite alternate;
-}
-@keyframes pulse {
-    0% { background: red; box-shadow: 0 0 6px red; }
-    50% { background: gold; box-shadow: 0 0 6px gold; }
-    100% { background: lime; box-shadow: 0 0 6px lime; }
 }
 
 /* --- RESPONSIVE --- */
@@ -156,29 +171,31 @@ p {
     <h1>🎄 Premium Christmas Experience 🎅</h1>
 
     <!-- CHRISTMAS TREE -->
-    <img id="tree" src="assets/tree.png" alt="Christmas Tree">
-
-    <!-- LIGHTS -->
-    <div class="lights">
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
+    <div style="position: relative; display: inline-block;">
+        <img id="tree" src="assets/tree.png" alt="Christmas Tree">
+        <div class="tree-lights">
+            <div class="tree-light"></div>
+            <div class="tree-light"></div>
+            <div class="tree-light"></div>
+            <div class="tree-light"></div>
+            <div class="tree-light"></div>
+            <div class="tree-light"></div>
+        </div>
     </div>
 
     <!-- CONTENT BLOCK -->
     <div class="content-block">
         <h2>Image 1 Section</h2>
-        <img src="assets/image1.jpg" alt="Image 1">
+        <img src="assets/image1.jpg" alt="Image 1" style="max-width:350px; width:100%; height:auto;">
         <p>Paragraph about Image 1.</p>
 
         <h2>Image 2 Section</h2>
-        <img src="assets/image2.jpg" alt="Image 2">
+        <img src="assets/image2.jpg" alt="Image 2" style="max-width:300px; width:100%; height:auto;">
         <p>Paragraph about Image 2.</p>
 
         <h2>Video Section</h2>
-        <video controls>
-            <source src="assets/video.mp4" type="video/mp4">
+        <video controls style="max-width:250px; width:100%; height:auto;">
+            <source src="assets/video1.mp4" type="video/mp4">
         </video>
         <p>Paragraph about the video.</p>
     </div>
@@ -188,14 +205,29 @@ p {
 /* POPUP */
 function closePopup(){ document.getElementById("popup").style.display="none"; }
 
-/* SNOW */
-for(let i=0;i<80;i++){
+/* SNOW - multiple layers for depth */
+for(let i=0;i<60;i++){
     let f=document.createElement("div");
-    f.className="snowflake";
+    f.className="snowflake slow";
     f.innerHTML="❄";
     f.style.left=Math.random()*100+"vw";
-    f.style.fontSize=(10+Math.random()*20)+"px";
-    f.style.animationDuration=(4+Math.random()*6)+"s";
+    f.style.fontSize=(10+Math.random()*15)+"px";
+    document.body.appendChild(f);
+}
+for(let i=0;i<50;i++){
+    let f=document.createElement("div");
+    f.className="snowflake medium";
+    f.innerHTML="❄";
+    f.style.left=Math.random()*100+"vw";
+    f.style.fontSize=(12+Math.random()*18)+"px";
+    document.body.appendChild(f);
+}
+for(let i=0;i<40;i++){
+    let f=document.createElement("div");
+    f.className="snowflake fast";
+    f.innerHTML="❄";
+    f.style.left=Math.random()*100+"vw";
+    f.style.fontSize=(14+Math.random()*20)+"px";
     document.body.appendChild(f);
 }
 </script>
